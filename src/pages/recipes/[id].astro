@@ -1,5 +1,7 @@
 ---
 import { getEntry } from "astro:content";
+import { ClientRouter } from "astro:transitions";
+import { fade } from "astro:transitions";
 import {
   CooklangParser,
   HTMLRenderer,
@@ -105,10 +107,12 @@ const hasSidebar = flatIngredients.length > 0 || flatCookware.length > 0;
 
 const tags = Array.from(recipe.tags).filter(Boolean);
 const servings = recipe.servings != null ? String(recipe.servings) : null;
+
 ---
 
 <html lang="en">
   <head>
+    <ClientRouter />
     <meta charset="utf-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -125,12 +129,14 @@ const servings = recipe.servings != null ? String(recipe.servings) : null;
     <title>{entry.data.title} — Adam Cooks</title>
   </head>
   <body class="bg-bg text-tx antialiased p-4 md:p-6 lg:p-8">
-    <nav class="mb-6 lg:mb-8">
+    <nav class="mb-6 lg:mb-8" transition:animate="fade">
       <a href="/" class="text-cy hover:underline">← Adam Cooks</a>
     </nav>
     <article class="max-w-6xl mx-auto">
-      <header class="mb-8 lg:mb-10">
-        <h1 class="text-3xl md:text-4xl uppercase text-or mb-2 tracking-tight">
+      <header class="mb-8 lg:mb-10" transition:name={`recipe-card-${id}`}>
+        <h1
+          class="text-3xl md:text-4xl uppercase text-or mb-2 tracking-tight"
+        >
           {entry.data.title}
         </h1>
         <div class="flex flex-wrap items-center gap-3">

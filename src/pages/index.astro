@@ -1,14 +1,28 @@
 ---
 import { getCollection } from "astro:content";
+import { ClientRouter } from "astro:transitions";
+import { fade } from "astro:transitions";
 import "../styles/global.css";
 
 const recipes = (await getCollection("recipes")).sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
 );
+
+const cardMorph = {
+  forwards: {
+    old: { name: "fade", duration: "0.1s", easing: "ease-out" },
+    new: { name: "fade", duration: "0.3s", easing: "ease-in" },
+  },
+  backwards: {
+    old: { name: "fade", duration: "0.3s", easing: "ease-out" },
+    new: { name: "fade", duration: "0.15s", easing: "ease-in" },
+  },
+};
 ---
 
 <html lang="en">
 	<head>
+		<ClientRouter />
 		<meta charset="utf-8" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,16 +39,20 @@ const recipes = (await getCollection("recipes")).sort((a, b) =>
 		<title>Adam Cooks</title>
 	</head>
 	<body class="bg-bg text-tx antialiased p-4">
-		<p class="text-center py-10 text-4xl uppercase text-or">Adam Cooks</p>
-		<main class="max-w-4xl mx-auto">
+		<p class="text-center py-10 text-4xl uppercase text-or" transition:animate="fade">Adam Cooks</p>
+		<main class="max-w-4xl mx-auto" transition:animate="fade">
 			<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none p-0 m-0">
 				{recipes.map((r) => (
 					<li>
 						<a
 							href={`/recipes/${r.id}`}
 							class="block p-5 rounded-lg bg-bg-2 border border-ui-2 hover:border-or hover:shadow-md transition-colors"
+							transition:name={`recipe-card-${r.id}`}
+							transition:animate={cardMorph}
 						>
-							<span class="text-lg font-medium text-tx">{r.data.title}</span>
+							<span class="text-lg font-medium text-tx">
+								{r.data.title}
+							</span>
 						</a>
 					</li>
 				))}

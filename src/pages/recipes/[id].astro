@@ -1,0 +1,275 @@
+---
+import { getEntry } from "astro:content";
+import {
+  CooklangParser,
+  HTMLRenderer,
+  getFlatIngredients,
+  getFlatCookware,
+} from "@cooklang/cooklang";
+import "../../styles/global.css";
+
+export async function getStaticPaths() {
+  const { getCollection } = await import("astro:content");
+  const recipes = await getCollection("recipes");
+  return recipes.map((r) => ({ params: { id: r.id } }));
+}
+
+/** Capitalize first letter of each word for display (e.g. "flour" → "Flour", "all-purpose flour" → "All-purpose Flour") */
+function formatIngredientName(name: string): string {
+  if (!name) return name;
+  return name
+    .split(/\s+/)
+    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
+/** Unit abbreviations to full form; singular when quantity ≤ 1 */
+const UNIT_MAP: [RegExp, (n: number) => string][] = [
+  [/\b(c|cup)\b/gi, (n) => (n <= 1 ? "cup" : "cups")],
+  [/\b(tbsp|tbsps)\b/gi, (n) => (n <= 1 ? "tablespoon" : "tablespoons")],
+  [/\b(tsp|tsps)\b/gi, (n) => (n <= 1 ? "teaspoon" : "teaspoons")],
+  [/\b(g|gram|grams)\b/gi, (n) => (n <= 1 ? "gram" : "grams")],
+  [/\b(kg|kgs)\b/gi, (n) => (n <= 1 ? "kilogram" : "kilograms")],
+  [/\b(ml|mls)\b/gi, (n) => (n <= 1 ? "milliliter" : "milliliters")],
+  [/\b(l)\b/gi, (n) => (n <= 1 ? "liter" : "liters")],
+  [/\b(oz)\b/gi, (n) => (n <= 1 ? "ounce" : "ounces")],
+  [/\b(lb|lbs)\b/gi, (n) => (n <= 1 ? "pound" : "pounds")],
+  [/\b(clove|cloves)\b/gi, (n) => (n <= 1 ? "clove" : "cloves")],
+  [/\b(pinch|pinches)\b/gi, (n) => (n <= 1 ? "pinch" : "pinches")],
+  [/\b(packet|packets)\b/gi, (n) => (n <= 1 ? "packet" : "packets")],
+  [/\b(can|cans)\b/gi, (n) => (n <= 1 ? "can" : "cans")],
+  [/\b(slice|slices)\b/gi, (n) => (n <= 1 ? "slice" : "slices")],
+  [/\b(sprig|sprigs)\b/gi, (n) => (n <= 1 ? "sprig" : "sprigs")],
+  [/\b(leaf|leaves)\b/gi, (n) => (n <= 1 ? "leaf" : "leaves")],
+  [/\b(hour|hours)\b/gi, (n) => (n <= 1 ? "hour" : "hours")],
+  [/\b(minute|minutes)\b/gi, (n) => (n <= 1 ? "minute" : "minutes")],
+];
+
+/** Parse numeric part from quantity string (e.g. "1 1/2" → 1.5, "2" → 2) for pluralization */
+function parseQuantityNum(str: string): number {
+  const trimmed = str.trim();
+  const simple = /^\d+(\.\d+)?$/.exec(trimmed);
+  if (simple) return parseFloat(simple[0]);
+  const mixed = /^(\d+)\s+(\d+)\/(\d+)$/.exec(trimmed);
+  if (mixed) return parseInt(mixed[1], 10) + parseInt(mixed[2], 10) / parseInt(mixed[3], 10);
+  const frac = /^(\d+)\/(\d+)$/.exec(trimmed);
+  if (frac) return parseInt(frac[1], 10) / parseInt(frac[2], 10);
+  return 1;
+}
+
+/** Expand unit abbreviations in quantity display text */
+function expandQuantityDisplay(text: string | null): string {
+  if (!text || !text.trim()) return "";
+  let out = text;
+  // Match "number + unit" to get number for pluralization (e.g. "1 c" → 1, "2 tbsp" → 2)
+  const numUnit = /^([\d\s./]+)\s+(.+)$/.exec(out.trim());
+  const n = numUnit ? parseQuantityNum(numUnit[1]) : 1;
+  for (const [regex, formatter] of UNIT_MAP) {
+    out = out.replace(regex, () => formatter(n));
+  }
+  return out.trim();
+}
+
+const { id } = Astro.params;
+const entry = await getEntry("recipes", id!);
+if (!entry) return Astro.redirect("/");
+
+const parser = new CooklangParser();
+const [recipe] = parser.parse(entry.data.rawText);
+const renderer = new HTMLRenderer();
+let recipeHtml = renderer.render(recipe);
+// Strip metadata block (first <ul>…</ul> and following <hr>) so we show only title + chips + body
+const ulEnd = recipeHtml.indexOf("</ul>");
+if (ulEnd !== -1) {
+  recipeHtml = recipeHtml
+    .slice(ulEnd + 5)
+    .replace(/^\s*<hr>\s*/i, "")
+    .trim();
+}
+// Remove "Section N" headers for unnamed sections (we only want named sections like "Cake", "Dough")
+recipeHtml = recipeHtml.replace(/<h3>Section \d+<\/h3>\s*/g, "");
+// Split into sidebar and main (sections only); we render sidebar from flat ingredients/cookware
+const [, ...sectionsParts] = recipeHtml.split(/<hr>/);
+let sectionsHtml = sectionsParts.join("<hr>").trim();
+// Drop "(1) ", "(2) ", etc. from section headings; order is enough
+sectionsHtml = sectionsHtml.replace(/<h3>\(\d+\)\s*/g, "<h3>");
+// Turn inline ingredient quantities into superscript chips (and expand units)
+sectionsHtml = sectionsHtml.replace(
+  /<i>\(([^)]+)\)<\/i>/g,
+  (_, qty) => `<span class="ingredient-qty">${expandQuantityDisplay(qty)}</span>`
+);
+
+const flatIngredients = getFlatIngredients(recipe);
+const flatCookware = getFlatCookware(recipe);
+const hasSidebar = flatIngredients.length > 0 || flatCookware.length > 0;
+
+const tags = Array.from(recipe.tags).filter(Boolean);
+const servings = recipe.servings != null ? String(recipe.servings) : null;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🍳</text></svg>"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{entry.data.title} — Adam Cooks</title>
+  </head>
+  <body class="bg-bg text-tx antialiased p-4 md:p-6 lg:p-8">
+    <nav class="mb-6 lg:mb-8">
+      <a href="/" class="text-cy hover:underline">← Adam Cooks</a>
+    </nav>
+    <article class="max-w-6xl mx-auto">
+      <header class="mb-8 lg:mb-10">
+        <h1 class="text-3xl md:text-4xl uppercase text-or mb-2 tracking-tight">
+          {entry.data.title}
+        </h1>
+        <div class="flex flex-wrap items-center gap-3">
+          {servings && (
+            <span class="text-sm text-tx-2">Serves {servings}</span>
+          )}
+          {tags.length > 0 && (
+            <ul class="flex flex-wrap gap-2 list-none p-0 m-0" aria-label="Tags">
+              {tags.map((tag) => (
+                <li>
+                  <span class="text-xs uppercase tracking-wide px-2 py-1 rounded-full bg-ui-2 text-tx-2">
+                    {tag}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 lg:gap-14 items-start">
+        <div class="recipe-steps min-w-0">
+          <div
+            class="recipe-content prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h3:text-or prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 first:prose-h3:mt-0 prose-p:leading-relaxed prose-p:my-3"
+            set:html={sectionsHtml}
+          />
+        </div>
+        {hasSidebar && (
+          <aside class="recipe-sidebar lg:sticky lg:top-6 space-y-8 p-6 rounded-xl bg-bg-2 border border-ui-2">
+            {flatIngredients.length > 0 && (
+              <div class="sidebar-block">
+                <h2>Ingredients</h2>
+                <ul>
+                  {flatIngredients.map((ing) => {
+                    const qty = expandQuantityDisplay(ing.displayText);
+                    const note = ing.note ? ` (${ing.note})` : "";
+                    return (
+                      <li>
+                        <b>{formatIngredientName(ing.name)}</b>
+                        {qty ? `: ${qty}${note}` : note}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+            {flatCookware.length > 0 && (
+              <div class="sidebar-block">
+                <h2>Cookware</h2>
+                <ul>
+                  {flatCookware.map((cw) => (
+                    <li>
+                      <b>{formatIngredientName(cw.name)}</b>
+                      {cw.displayText ? `: ${expandQuantityDisplay(cw.displayText)}` : ""}
+                      {cw.note ? ` (${cw.note})` : ""}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </aside>
+        )}
+      </div>
+    </article>
+  </body>
+</html>
+
+<style>
+  .recipe-content :global(ul) {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0;
+  }
+  .recipe-content :global(li) {
+    margin: 0.2rem 0;
+    padding-left: 0;
+  }
+  .recipe-content :global(p) {
+    margin: 0.75em 0;
+  }
+  .recipe-content :global(p b) {
+    font-weight: 600;
+    color: var(--color-or);
+    margin-right: 0.25em;
+  }
+  .recipe-content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-ui-3);
+    margin: 1.5rem 0;
+  }
+  .recipe-content :global(.ingredient),
+  .recipe-content :global(.cookware) {
+    font-style: normal;
+  }
+  .recipe-content :global(.ingredient-qty) {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-0.12em);
+    font-size: 0.72em;
+    font-style: normal;
+    padding: 0.1em 0.35em 0.14em;
+    margin-left: 0.28em;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-or) 75%, var(--color-base-800));
+    color: var(--color-bg);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .recipe-content :global(.timer i) {
+    font-style: normal;
+    color: var(--color-tx-2);
+  }
+
+  .recipe-sidebar :global(h2) {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-tx-2);
+    margin: 0 0 0.75rem 0;
+  }
+  .recipe-sidebar :global(h2:not(:first-child)) {
+    margin-top: 1.5rem;
+  }
+  .recipe-sidebar :global(ul) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .recipe-sidebar :global(li) {
+    font-size: 0.9375rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--color-ui);
+  }
+  .recipe-sidebar :global(li:last-child) {
+    border-bottom: none;
+  }
+  .recipe-sidebar :global(b) {
+    font-weight: 600;
+    color: var(--color-tx);
+  }
+</style>

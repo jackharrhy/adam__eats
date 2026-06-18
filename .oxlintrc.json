@@ -1,0 +1,42 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["typescript", "import", "unicorn", "promise"],
+	"categories": {
+		"correctness": "error",
+		"suspicious": "warn",
+		"perf": "warn"
+	},
+	"rules": {
+		"no-await-in-loop": "off",
+		"no-unused-vars": [
+			"warn",
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"unicorn/filename-case": "off",
+		"unicorn/no-null": "off",
+		"unicorn/prefer-add-event-listener": "off",
+		"typescript/no-unsafe-type-assertion": "warn",
+		"typescript/unbound-method": "off",
+		"typescript/no-unnecessary-boolean-literal-compare": "off",
+		"no-underscore-dangle": "off",
+		"typescript/consistent-return": "off",
+		"typescript/no-unnecessary-type-conversion": "off",
+		"import/no-named-as-default": "off",
+		"import/no-unassigned-import": [
+			"warn",
+			{
+				"allow": ["**/*.css"]
+			}
+		]
+	},
+	"ignorePatterns": [
+		"**/dist/**",
+		"**/node_modules/**",
+		"**/*.d.ts",
+		"**/.astro/**",
+		"**/.emdash/**"
+	]
+}

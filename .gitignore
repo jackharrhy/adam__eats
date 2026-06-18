@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# emdash runtime data + generated types
+data/
+uploads/
+.emdash/
+
+# legacy .cook files (kept for reference, not used at runtime)
+tmp/

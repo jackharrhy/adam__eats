@@ -1,12 +1,15 @@
 ---
-import { getCollection } from "astro:content";
+import { getEmDashCollection } from "emdash";
 import { ClientRouter } from "astro:transitions";
-import { fade } from "astro:transitions";
 import "../styles/global.css";
+import type { RecipeData } from "../types";
 
-const recipes = (await getCollection("recipes")).sort((a, b) =>
-  a.data.title.localeCompare(b.data.title)
-);
+const { entries } = await getEmDashCollection("recipes", {
+	status: "published",
+});
+const recipes = (
+	entries as unknown as Array<{ id: string; data: RecipeData }>
+).toSorted((a, b) => a.data.title.localeCompare(b.data.title));
 
 const cardMorph = {
   forwards: {

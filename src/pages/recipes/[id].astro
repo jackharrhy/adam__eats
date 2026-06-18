@@ -1,20 +1,15 @@
 ---
-import { getEntry } from "astro:content";
+import { getEmDashEntry } from "emdash";
 import { ClientRouter } from "astro:transitions";
-import { fade } from "astro:transitions";
 import {
-  CooklangParser,
-  HTMLRenderer,
-  getFlatIngredients,
-  getFlatCookware,
+	CooklangParser,
+	HTMLRenderer,
+	getFlatIngredients,
+	getFlatCookware,
 } from "@cooklang/cooklang";
 import "../../styles/global.css";
 
-export async function getStaticPaths() {
-  const { getCollection } = await import("astro:content");
-  const recipes = await getCollection("recipes");
-  return recipes.map((r) => ({ params: { id: r.id } }));
-}
+export const prerender = false;
 
 /** Capitalize first letter of each word for display (e.g. "flour" → "Flour", "all-purpose flour" → "All-purpose Flour") */
 function formatIngredientName(name: string): string {
@@ -73,11 +68,12 @@ function expandQuantityDisplay(text: string | null): string {
 }
 
 const { id } = Astro.params;
-const entry = await getEntry("recipes", id!);
+const { entry, error } = await getEmDashEntry("recipes", id!);
+if (error) return new Response(null, { status: 500 });
 if (!entry) return Astro.redirect("/");
 
 const parser = new CooklangParser();
-const [recipe] = parser.parse(entry.data.rawText);
+const [recipe] = parser.parse(entry.data.cook_source as string);
 const renderer = new HTMLRenderer();
 let recipeHtml = renderer.render(recipe);
 // Strip metadata block (first <ul>…</ul> and following <hr>) so we show only title + chips + body

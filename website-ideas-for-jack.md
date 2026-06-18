@@ -2,7 +2,7 @@ Websites I like:
 
 - [https://www.joshuaweissman.com/](https://www.joshuaweissman.com/)
 - [https://www.babi.sh/](https://www.babi.sh/)
-- [https://annaolson.ca/?gad\_source=1\&gad\_campaignid=23588082891\&gbraid=0AAAABC89PtOkAr8pd\_LvdOgZ9fx6wL6at\&gclid=Cj0KCQjw37nNBhDkARIsAEBGI8M96qV2xBS-Nf2o8DARtzG8nX6rX46FmtH0rJuoBNMq5kOqxQITyjcaAmiLEALw\_wcB](https://annaolson.ca/?gad_source=1&gad_campaignid=23588082891&gbraid=0AAAABC89PtOkAr8pd_LvdOgZ9fx6wL6at&gclid=Cj0KCQjw37nNBhDkARIsAEBGI8M96qV2xBS-Nf2o8DARtzG8nX6rX46FmtH0rJuoBNMq5kOqxQITyjcaAmiLEALw_wcB)
+- [https://annaolson.ca/?gad_source=1\&gad_campaignid=23588082891\&gbraid=0AAAABC89PtOkAr8pd_LvdOgZ9fx6wL6at\&gclid=Cj0KCQjw37nNBhDkARIsAEBGI8M96qV2xBS-Nf2o8DARtzG8nX6rX46FmtH0rJuoBNMq5kOqxQITyjcaAmiLEALw_wcB](https://annaolson.ca/?gad_source=1&gad_campaignid=23588082891&gbraid=0AAAABC89PtOkAr8pd_LvdOgZ9fx6wL6at&gclid=Cj0KCQjw37nNBhDkARIsAEBGI8M96qV2xBS-Nf2o8DARtzG8nX6rX46FmtH0rJuoBNMq5kOqxQITyjcaAmiLEALw_wcB)
 - [https://tasty.co/](https://tasty.co/)
 
 Recipes:
@@ -32,7 +32,7 @@ Add the cooked chicken and cooked pasta to the sauce and toss until combined and
 pasta and chicken are warmed through. Add warm reserved pasta water if desired
 to thin the sauce. Serve with freshly grated parmesan and chopped parsley
 
-# 
+#
 
 # Chocolate Chip Pecan Cookies
 
@@ -74,7 +74,7 @@ Bake for 10-13 minutes, or until lightly browned on the outside and slightly
 underdone on the inside.\
 Set on a wire rack to cool slightly before serving.
 
-# 
+#
 
 # Sticky Toffee Pudding
 
@@ -242,7 +242,7 @@ Pour over the chilled mousse cake, letting it spread evenly.
 
 Allow glaze to set before slicing and serving.
 
-# 
+#
 
 # Buljol
 

@@ -1,13 +1,24 @@
-FROM node:25-alpine AS build
+FROM node:24-slim AS base
+RUN corepack enable
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml* package-lock.json* ./
-RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+FROM base AS deps
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 
+FROM base AS build
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+RUN pnpm build
 
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:24-slim
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package.json ./
+COPY --from=build /app/seed ./seed
+RUN mkdir -p data uploads
+ENV HOST=0.0.0.0
+ENV PORT=4321
+EXPOSE 4321
+CMD ["node", "./dist/server/entry.mjs"]

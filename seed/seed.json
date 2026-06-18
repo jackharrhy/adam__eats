@@ -1,0 +1,137 @@
+{
+  "$schema": "https://emdashcms.com/seed.schema.json",
+  "version": "1",
+  "meta": {
+    "name": "adam__eats",
+    "description": "Cooklang recipe site powered by EmDash",
+    "author": "jack"
+  },
+  "settings": {
+    "title": "adam__eats",
+    "tagline": "Cooklang recipe site"
+  },
+  "collections": [
+    {
+      "slug": "recipes",
+      "label": "Recipes",
+      "labelSingular": "Recipe",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search",
+        "seo"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "cook_source",
+          "label": "Cooklang Source",
+          "type": "text",
+          "required": true,
+          "searchable": true,
+          "options": {
+            "rows": 24
+          }
+        },
+        {
+          "slug": "cover_image",
+          "label": "Cover Image",
+          "type": "image",
+          "options": {
+            "showPreview": true
+          }
+        },
+        {
+          "slug": "excerpt",
+          "label": "Excerpt",
+          "type": "text",
+          "options": {
+            "rows": 2
+          }
+        }
+      ]
+    }
+  ],
+  "content": {
+    "recipes": [
+      {
+        "id": "buljol",
+        "slug": "buljol",
+        "status": "published",
+        "data": {
+          "title": "Buljol",
+          "cook_source": "---\ntitle: Buljol\nservings: 4\ntags:\n  - Caribbean\n  - Fish\n  - Bread\n---\n\n= Buljol =\n\nPlace @salt cod{1%lb} in cold water and shred into thin strands. Squeeze to remove salt, place in fresh water. Repeat 5–7 times; remove as much water as possible on last rinse.\n\nDice @onion{1}(medium), finely mince @garlic{4%cloves}, dice @habanero pepper{1}(seeds removed). Mix into the cod with @lemon juice{3%tbsp} (or lime/vinegar) and @olive oil{4%tbsp}. Season with @salt{} and @black pepper{}. Let sit at least ~{3%hours} or ideally overnight.\n\nSlice tomatoes, eggs, avocado or bell pepper to garnish. Serve with crusty bread or boiled potatoes.\n\n= Bread =\n\nCombine @active dry yeast{2 1/4%tsp}, @sugar{1%tsp}, and @warm water{1 1/4%cups} in a large bowl. Add @all-purpose flour{2 1/2%cups} to @3 1/2%cups and @kosher salt{1 1/4%tsp}. Mix until sticky dough forms. Cover and let rise ~{1%hour} until doubled.\n\nTip onto floured surface, fold edges until tight. Shape into a round. Rest in floured bowl ~{30%minutes} while oven preheats.\n\nPreheat #Dutch oven{} or #cast iron{} to 450°F. Bake dough seam side up ~{30%minutes}, remove lid, bake ~{10%minutes} more until golden.\n"
+        }
+      },
+      {
+        "id": "chocolate-chip-pecan-cookies",
+        "slug": "chocolate-chip-pecan-cookies",
+        "status": "published",
+        "data": {
+          "title": "Chocolate Chip Pecan Cookies",
+          "cook_source": "---\ntitle: Chocolate Chip Pecan Cookies\nservings: 12\ntags:\n  - Cookies\n  - Dessert\n  - Baking\n---\n\nMelt @unsalted butter{1.25%cups} in a medium #saucepan{}, then set aside to cool.\n\nIn a medium bowl, whisk together @cake flour{1.5%cups}, @all-purpose flour{2%cups}, @kosher salt{1.5%tsp}, @cornstarch{2%tsp}, and @baking soda{1/2%tsp}. Set aside.\n\nIn another medium bowl whisk @light brown sugar{1.25%cups} and @granulated sugar{1/2%cup} with the melted butter until creamy. Add @eggs{2} one at a time, then @egg yolks{3}, mixing fully after each. Whisk in @vanilla extract{2%tsp}.\n\nMix in the flour mixture until fully incorporated. Fold in @pecans{2%cups}(roughly chopped) and @dark chocolate{1%lb}(roughly chopped). Cover and refrigerate for at least ~{1%hour}.\n\nPreheat the #oven{} to 425°F (220°C). Divide dough into roughly 6 ounce pieces, roll into tight balls. Place 4 cookies on a parchment-lined #baking sheet{}. Bake for ~{10%minutes} or up to ~{13%minutes}, until lightly browned outside and slightly underdone inside. Cool on a wire rack.\n"
+        }
+      },
+      {
+        "id": "chocolate-mousse",
+        "slug": "chocolate-mousse",
+        "status": "published",
+        "data": {
+          "title": "Chocolate Mousse",
+          "cook_source": "---\ntitle: Chocolate Mousse\nservings: 8\ntags:\n  - Dessert\n  - Chocolate\n  - Cake\n---\n\n= Chocolate Cake Layer =\n\nSift @flour{1%cup}, @baking powder{1/2%tsp}, @baking soda{1/2%tsp}, and @unsweetened cocoa powder{2%tbsp} into a bowl. Add @sugar{3/4%cup} and @salt{1%pinch}.\n\nIn another bowl whisk @egg{1}, @vegetable oil{1/4%cup}, and @milk{1/2%cup}. Combine wet and dry, then stir in @hot water{1/2%cup} until smooth.\n\nPour into a greased 9\" #springform pan{} lined with parchment. Bake at 350°F (175°C) for ~{25%minutes} to ~{30%minutes}. Cool completely.\n\n= Coffee Syrup =\n\nCombine @water{1/4%cup}, @sugar{2%tbsp}, and @instant coffee{1%tsp} in a small #saucepan{}. Bring to a boil, remove from heat.\n\nBrush over cooled cake.\n\n= Chocolate Mousse =\n\nHeat @heavy cream{1 1/3%cups} to about 150°F. Pour over chopped @dark chocolate{7%oz}(70%). Let sit 1 minute, stir until smooth. Cool to room temperature, refrigerate ~{30%minutes}. Whisk until light and fluffy.\n\nWhip remaining @cold heavy cream{1%cup} with @sugar{1%tbsp} and @vanilla{1%tsp} to soft peaks. Fold into chocolate.\n\nSpread over cake and refrigerate at least ~{2%hours}.\n\n= Chocolate Mirror Glaze =\n\nBring @water{1/2%cup}, @sugar{1%cup}, and @glucose{1%tbsp} to a boil.\n\nSift @cocoa powder{1/4%cup} into a bowl, whisk in hot syrup. Add @gelatin{7%g}, stir until dissolved.\n\nCool to 30°C. Pour over chilled mousse cake. Let set before slicing.\n"
+        }
+      },
+      {
+        "id": "cinnamon-buns",
+        "slug": "cinnamon-buns",
+        "status": "published",
+        "data": {
+          "title": "Cinnamon Buns",
+          "cook_source": "---\ntitle: Cinnamon Buns\nservings: 12\ntags:\n  - Baking\n  - Breakfast\n  - Pastry\n---\n\n= Dough =\n\nIn a large bowl whisk @all-purpose flour{4%cups}, @granulated sugar{1/2%cup}, and @fine sea salt{3/4%tsp}. Add @unsalted butter{1/3%cup}(softened) and work in with forks or fingers.\n\nWarm @whole milk{1%cup} to about 100°F, whisk in @instant yeast{2.25%tsp}. Mix flour mixture with milk and @eggs{2} and @egg yolk{1} until a loose dough forms.\n\nKnead on floured surface ~{5%minutes} to ~{8%minutes} until smooth. Place in greased bowl, cover, rise ~{90%minutes} until doubled.\n\n= Filling =\n\nWhisk @Demerara sugar{1%cup} and @ground cinnamon{2.5%tbsp} together. Set aside.\n\n= Assembly and Baking =\n\nRoll dough into a rectangle about 27\" x ¼\" thick. Spread @unsalted butter{1/3%cup}(softened) and sprinkle cinnamon sugar evenly.\n\nRoll into a log, cut into 2\" rolls. Place in #baking tray{}, rest ~{30%minutes} to ~{45%minutes} until 1.5x size.\n\nBake at 375°F (190°C) for ~{15%minutes} to ~{20%minutes}.\n\nWhisk @cream cheese{4%oz}(softened) until fluffy, add @powdered sugar{3/4%cup}, then @whole milk{2%tbsp} to ~{3%tbsp} and @vanilla bean{1/2}. Pour glaze over buns.\n"
+        }
+      },
+      {
+        "id": "creamy-cajun-chicken-pasta",
+        "slug": "creamy-cajun-chicken-pasta",
+        "status": "published",
+        "data": {
+          "title": "Creamy Cajun Chicken Pasta",
+          "cook_source": "---\ntitle: Creamy Cajun Chicken Pasta\nservings: 4\ntags:\n  - Pasta\n  - Chicken\n  - Cajun\n---\n\nCook @linguine pasta{8%oz} according to package. Reserve pasta water.\n\nCut @boneless chicken thighs{4} into small pieces. Season with @cajun seasoning{1 1/2%tbsp} and fry in @olive oil{2%tsp} in a #pan{} until cooked. Remove to a bowl.\n\nAdd @unsalted butter{4%tbsp} to the same #pan{}. Sauté @garlic{5%cloves}(minced) until aromatic. Add @tomato paste{1%tbsp} and fry for one minute.\n\nAdd @heavy whipping cream{1 1/2%cup}, more @cajun seasoning{} to taste, and @parmesan cheese{1/2%cup}(grated). Bring to a simmer.\n\nAdd the cooked chicken and cooked pasta to the sauce and toss until combined and warmed through. Add reserved pasta water if desired to thin. Serve with @parmesan cheese{}(freshly grated) and @parsley{2%tbsp}(finely chopped).\n"
+        }
+      },
+      {
+        "id": "crispy-calamari",
+        "slug": "crispy-calamari",
+        "status": "published",
+        "data": {
+          "title": "Crispy Calamari",
+          "cook_source": "---\ntitle: Crispy Calamari\nservings: 2\ntags:\n  - Seafood\n  - Appetizer\n  - Fried\n---\n\nSkin, rinse, and cut @squid{2}(whole) into rings. Place in a bowl with @lemon juice{}(squeeze), @bicarbonate of soda{3%tsp}, @salt{}(large pinch), @egg{1}, and @all-purpose flour{1%tbsp}. Mix well and leave to tenderise in the fridge for at least ~{1%hour}.\n\nHeat @vegetable oil{} to 180°C (355°F) in a heavy #pan{}. Coat squid in @panko breadcrumbs{} in batches.\n\nFry for ~{3%minutes} to ~{5%minutes} until crisp and golden. Season with salt and serve hot with your favourite sauce.\n"
+        }
+      },
+      {
+        "id": "pumpkin-pie",
+        "slug": "pumpkin-pie",
+        "status": "published",
+        "data": {
+          "title": "Pumpkin Pie",
+          "cook_source": "---\ntitle: Pumpkin Pie\nservings: 8\ntags:\n  - Dessert\n  - Pie\n  - Thanksgiving\n---\n\n= Pumpkin Puree (or use 15 oz can) =\n\nCut top and bottom off @sugar pumpkin{1}, halve, remove seeds.\n\nBrush with oil, roast on foil-lined sheet at 400°F (205°C) for ~{40%minutes} until soft.\n\nRemove skins, blend until smooth. If watery, boil off in a #pan{}.\n\n= Crust =\n\nCombine @all-purpose flour{2%cups}, @granulated sugar{1%tbsp}, and @fine sea salt{1%tsp}. Add @cold unsalted butter{1%cup}(cubed), mix to pea-sized pieces.\n\nDrizzle in @ice water{} until cohesive.\n\nFlatten to 4\" disk, wrap, chill ~{20%minutes}.\n\nRoll to ¼\" thick, fit into 9\" #pie dish{}, trim and crimp. Chill briefly.\n\n= Filling =\n\nWhisk together pumpkin puree, @sweetened condensed milk{1%can}, @brown sugar{1/2%cup}(packed), @eggs{2} plus @egg yolk{1}, @fine sea salt{1/2%tsp}, @ground ginger{1%tsp}, @ground cinnamon{1 1/2%tsp}, @ground cloves{1/4%tsp}, @nutmeg{1/4%tsp}(grated), and @vanilla extract{2%tsp}. Pour into crust.\n\nBake 10 minutes at 400°F, then 35–40 minutes at 375°F until set with slight jiggle.\n\nCool to room temperature, chill ~{4%hours}. Top with whipped cream and cinnamon or nutmeg.\n"
+        }
+      },
+      {
+        "id": "sticky-toffee-pudding",
+        "slug": "sticky-toffee-pudding",
+        "status": "published",
+        "data": {
+          "title": "Sticky Toffee Pudding",
+          "cook_source": "---\ntitle: Sticky Toffee Pudding\nservings: 12\ntags:\n  - Dessert\n  - Holiday\n  - Baking\n---\n\n= Cake =\n\nBring @pitted dates{1%cup}(roughly chopped) and @water{1%cup}(boiling) to a boil in a small #pot{}, then simmer until soft. Add @baking soda{1/2%tsp} and puree until smooth.\n\nIn a bowl combine @all-purpose flour{1.5%cups}, @baking powder{1/4%tsp}, @fine sea salt{3/4%tsp}, and @nutmeg{1/2%tsp}(freshly grated). In a large bowl whisk @unsalted butter{6%tbsp}(softened) until creamy, add @light brown sugar{3/4%cup}(packed) and beat until light and fluffy, ~{3%minutes} to ~{5%minutes}. Add @eggs{2} one at a time, @egg yolk{1}, @vanilla bean paste{2%tsp}, and date puree. Fold in flour in two batches until just combined.\n\nPour into a greased 9x13\" #baking dish{} and bake at 350°F (177°C) for ~{25%minutes} to ~{30%minutes} until a cake tester comes out clean. Poke holes all over with a skewer or fork.\n\n= Toffee Sauce =\n\nIn a #saucepan{} combine @light brown sugar{1%cup}(packed), @unsalted butter{1/2%cup}, @light corn syrup{1/3%cup}, @molasses{2%tbsp}, and @heavy whipping cream{1%cup}. Bring to a boil and cook ~{4%minutes}.\n\nReduce and cook for ~{15%minutes} to ~{20%minutes} until deep amber.\n\nAdd remaining @heavy whipping cream{1%cup} and cook ~{3%minutes} to ~{4%minutes}. Pour sauce over cake. Slice and serve with ice cream.\n"
+        }
+      }
+    ]
+  }
+}

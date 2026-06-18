@@ -1,3 +1,14 @@
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - "@emdash-cms/admin@0.21.0"
+  - "@emdash-cms/auth@0.21.0"
+  - "@emdash-cms/blocks@0.21.0"
+  - "@emdash-cms/gutenberg-to-portable-text@0.21.0"
+  - emdash@0.21.0
 onlyBuiltDependencies:
   - esbuild
   - sharp
+  - better-sqlite3

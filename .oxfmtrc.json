@@ -1,0 +1,15 @@
+{
+	"useTabs": true,
+	"experimentalSortImports": {},
+	"ignorePatterns": [
+		"**/dist/**",
+		"**/node_modules/**",
+		"**/*.mdx",
+		"**/package.json",
+		"**/emdash-env.d.ts",
+		"**/worker-configuration.d.ts",
+		"**/.astro/**",
+		"**/.vscode/**",
+		"seed/**"
+	]
+}

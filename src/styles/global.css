@@ -2,95 +2,95 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-paper: #fffcf0;
-  --color-black: #100f0f;
+	--color-paper: #fffcf0;
+	--color-black: #100f0f;
 
-  --color-base-50: #f2f0e5;
-  --color-base-100: #e6e4d9;
-  --color-base-150: #dad8ce;
-  --color-base-200: #cecdc3;
-  --color-base-300: #b7b5ac;
-  --color-base-500: #878580;
-  --color-base-600: #6f6e69;
-  --color-base-700: #575653;
-  --color-base-800: #403e3c;
-  --color-base-850: #343331;
-  --color-base-900: #282726;
-  --color-base-950: #1c1b1a;
+	--color-base-50: #f2f0e5;
+	--color-base-100: #e6e4d9;
+	--color-base-150: #dad8ce;
+	--color-base-200: #cecdc3;
+	--color-base-300: #b7b5ac;
+	--color-base-500: #878580;
+	--color-base-600: #6f6e69;
+	--color-base-700: #575653;
+	--color-base-800: #403e3c;
+	--color-base-850: #343331;
+	--color-base-900: #282726;
+	--color-base-950: #1c1b1a;
 
-  --color-red-400: #d14d41;
-  --color-red-600: #af3029;
-  --color-orange-400: #da702c;
-  --color-orange-600: #bc5215;
-  --color-yellow-400: #d0a215;
-  --color-yellow-600: #ad8301;
-  --color-green-400: #879a39;
-  --color-green-600: #66800b;
-  --color-cyan-400: #3aa99f;
-  --color-cyan-600: #24837b;
-  --color-blue-400: #4385be;
-  --color-blue-600: #205ea6;
-  --color-purple-400: #8b7ec8;
-  --color-purple-600: #5e409d;
-  --color-magenta-400: #ce5d97;
-  --color-magenta-600: #a02f6f;
+	--color-red-400: #d14d41;
+	--color-red-600: #af3029;
+	--color-orange-400: #da702c;
+	--color-orange-600: #bc5215;
+	--color-yellow-400: #d0a215;
+	--color-yellow-600: #ad8301;
+	--color-green-400: #879a39;
+	--color-green-600: #66800b;
+	--color-cyan-400: #3aa99f;
+	--color-cyan-600: #24837b;
+	--color-blue-400: #4385be;
+	--color-blue-600: #205ea6;
+	--color-purple-400: #8b7ec8;
+	--color-purple-600: #5e409d;
+	--color-magenta-400: #ce5d97;
+	--color-magenta-600: #a02f6f;
 
-  --color-bg: #fffcf0;
-  --color-bg-2: #f2f0e5;
-  --color-ui: #e6e4d9;
-  --color-ui-2: #dad8ce;
-  --color-ui-3: #cecdc3;
-  --color-tx-3: #b7b5ac;
-  --color-tx-2: #6f6e69;
-  --color-tx: #100f0f;
-  --color-re: #af3029;
-  --color-or: #bc5215;
-  --color-ye: #ad8301;
-  --color-gr: #66800b;
-  --color-cy: #24837b;
-  --color-bl: #205ea6;
-  --color-pu: #5e409d;
-  --color-ma: #a02f6f;
+	--color-bg: #fffcf0;
+	--color-bg-2: #f2f0e5;
+	--color-ui: #e6e4d9;
+	--color-ui-2: #dad8ce;
+	--color-ui-3: #cecdc3;
+	--color-tx-3: #b7b5ac;
+	--color-tx-2: #6f6e69;
+	--color-tx: #100f0f;
+	--color-re: #af3029;
+	--color-or: #bc5215;
+	--color-ye: #ad8301;
+	--color-gr: #66800b;
+	--color-cy: #24837b;
+	--color-bl: #205ea6;
+	--color-pu: #5e409d;
+	--color-ma: #a02f6f;
 
-  --font-sans: "Fraunces", "Iowan Old Style", "Palatino Linotype",
-    "Book Antiqua", Palatino, "URW Palladio L", serif;
+	--font-sans:
+		"Fraunces", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "URW Palladio L",
+		serif;
 
-  /* Prose (typography plugin) overrides to match theme */
-  --tw-prose-body: var(--color-tx);
-  --tw-prose-headings: var(--color-tx);
-  --tw-prose-links: var(--color-cy);
-  --tw-prose-bold: var(--color-tx);
-  --tw-prose-counters: var(--color-or);
-  --tw-prose-quotes: var(--color-tx-2);
-  --tw-prose-quote-borders: var(--color-ui-3);
-  --tw-prose-hr: var(--color-ui-3);
-  --tw-prose-th-borders: var(--color-ui-3);
-  --tw-prose-td-borders: var(--color-ui-2);
+	/* Prose (typography plugin) overrides to match theme */
+	--tw-prose-body: var(--color-tx);
+	--tw-prose-headings: var(--color-tx);
+	--tw-prose-links: var(--color-cy);
+	--tw-prose-bold: var(--color-tx);
+	--tw-prose-counters: var(--color-or);
+	--tw-prose-quotes: var(--color-tx-2);
+	--tw-prose-quote-borders: var(--color-ui-3);
+	--tw-prose-hr: var(--color-ui-3);
+	--tw-prose-th-borders: var(--color-ui-3);
+	--tw-prose-td-borders: var(--color-ui-2);
 }
 
 :root {
-  color-scheme: light;
+	color-scheme: light;
 }
 
 html {
-  background-color: var(--color-bg);
-  color: var(--color-tx);
+	background-color: var(--color-bg);
+	color: var(--color-tx);
 }
 
 body {
-  min-height: 100vh;
-  margin: 0;
-  background:
-    radial-gradient(circle at top, rgb(255 255 255 / 0.45), transparent 34%),
-    var(--color-bg);
-  color: var(--color-tx);
-  font-family: var(--font-sans);
+	min-height: 100vh;
+	margin: 0;
+	background:
+		radial-gradient(circle at top, rgb(255 255 255 / 0.45), transparent 34%), var(--color-bg);
+	color: var(--color-tx);
+	font-family: var(--font-sans);
 }
 
 a {
-  color: var(--color-cy);
+	color: var(--color-cy);
 }
 
 ::selection {
-  background-color: color-mix(in srgb, var(--color-yellow-400) 35%, white);
+	background-color: color-mix(in srgb, var(--color-yellow-400) 35%, white);
 }

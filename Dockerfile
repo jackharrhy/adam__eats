@@ -17,7 +17,7 @@ COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package.json ./
 COPY --from=build /app/seed ./seed
-RUN mkdir -p data uploads
+RUN mkdir -p data
 ENV HOST=0.0.0.0
 ENV PORT=4321
 EXPOSE 4321

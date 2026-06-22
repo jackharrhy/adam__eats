@@ -1,0 +1,11 @@
+services:
+  adam_eats:
+    build: .
+    ports:
+      - "127.0.0.1:4321:4321"
+    volumes:
+      - adam_eats_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  adam_eats_data:

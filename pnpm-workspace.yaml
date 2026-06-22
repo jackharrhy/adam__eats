@@ -3,11 +3,15 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - "@emdash-cms/admin@0.21.0"
-  - "@emdash-cms/auth@0.21.0"
-  - "@emdash-cms/blocks@0.21.0"
-  - "@emdash-cms/gutenberg-to-portable-text@0.21.0"
-  - emdash@0.21.0
+  - "@astrojs/markdown-satteri@0.3.1"
+  - "@astrojs/node@11.0.0"
+  - "@astrojs/react@6.0.0"
+  - "@emdash-cms/admin@0.22.0"
+  - "@emdash-cms/auth@0.22.0"
+  - "@emdash-cms/blocks@0.22.0"
+  - "@emdash-cms/gutenberg-to-portable-text@0.22.0"
+  - astro@7.0.0
+  - emdash@0.22.0
 onlyBuiltDependencies:
   - esbuild
   - sharp

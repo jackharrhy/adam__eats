@@ -21,12 +21,12 @@
     "knip": "knip --no-exit-code --exclude unlisted,unresolved,exports,types,duplicates"
   },
   "dependencies": {
-    "@astrojs/node": "^10.1.4",
-    "@astrojs/react": "^5.0.7",
+    "@astrojs/node": "^11.0.0",
+    "@astrojs/react": "^6.0.0",
     "@cooklang/cooklang": "^0.18.7",
-    "astro": "^6.4.8",
+    "astro": "^7.0.0",
     "better-sqlite3": "^12.8.0",
-    "emdash": "^0.21.0",
+    "emdash": "^0.22.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },

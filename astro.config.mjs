@@ -10,6 +10,7 @@ import { sqlite } from "emdash/db";
 export default defineConfig({
 	output: "server",
 	adapter: node({ mode: "standalone" }),
+	compressHTML: true,
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,

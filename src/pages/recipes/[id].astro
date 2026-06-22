@@ -8,6 +8,7 @@ import {
 	getFlatCookware,
 } from "@cooklang/cooklang";
 import "../../styles/global.css";
+import { recipeImageUrl } from "../../utils/images";
 
 export const prerender = false;
 
@@ -109,11 +110,18 @@ const servings = recipe.servings != null ? String(recipe.servings) : null;
 <html lang="en">
   <head>
     <ClientRouter />
+    <script is:inline>
+      document.addEventListener("astro:before-swap", (e) => {
+        if (e.navigationType === "traverse") {
+          e.newDocument.documentElement.style.minHeight = `${history.state.scrollY + innerHeight}px`;
+        }
+      });
+    </script>
     <meta charset="utf-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cause:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -124,26 +132,31 @@ const servings = recipe.servings != null ? String(recipe.servings) : null;
     <meta name="generator" content={Astro.generator} />
     <title>{entry.data.title} — adam__eats</title>
   </head>
-  <body class="bg-bg text-tx antialiased p-4 md:p-6 lg:p-8">
+  <body class="text-tx antialiased p-4 md:p-6 lg:p-8">
     <nav class="mb-6 lg:mb-8" transition:animate="fade">
-      <a href="/" class="text-cy hover:underline">← adam__eats</a>
+      <a href="/" class="text-cy hover:underline font-medium">← adam__eats</a>
     </nav>
-    <article class="max-w-6xl mx-auto">
+    <article class="max-w-6xl mx-auto" transition:animate="fade">
       <header class="mb-8 lg:mb-10" transition:name={`recipe-card-${id}`}>
+        <img
+          src={recipeImageUrl(entry.data.title, entry.data.cover_image as { url?: string } | null)}
+          alt={entry.data.title as string}
+          class="w-full aspect-square object-cover rounded-2xl mb-6 max-w-md mx-auto shadow-md"
+        />
         <h1
-          class="text-3xl md:text-4xl uppercase text-or mb-2 tracking-tight"
+          class="text-3xl md:text-4xl font-bold text-re mb-2 tracking-tight"
         >
           {entry.data.title}
         </h1>
         <div class="flex flex-wrap items-center gap-3">
           {servings && (
-            <span class="text-sm text-tx-2">Serves {servings}</span>
+            <span class="text-sm font-medium text-bl bg-blue-400/10 px-3 py-1 rounded-full">Serves {servings}</span>
           )}
           {tags.length > 0 && (
             <ul class="flex flex-wrap gap-2 list-none p-0 m-0" aria-label="Tags">
               {tags.map((tag) => (
                 <li>
-                  <span class="text-xs uppercase tracking-wide px-2 py-1 rounded-full bg-ui-2 text-tx-2">
+                  <span class="text-xs uppercase tracking-wide font-semibold px-2.5 py-1 rounded-full bg-ma/10 text-pu">
                     {tag}
                   </span>
                 </li>
@@ -156,12 +169,12 @@ const servings = recipe.servings != null ? String(recipe.servings) : null;
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 lg:gap-14 items-start">
         <div class="recipe-steps min-w-0">
           <div
-            class="recipe-content prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h3:text-or prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 first:prose-h3:mt-0 prose-p:leading-relaxed prose-p:my-3"
+            class="recipe-content prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h3:text-ma prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 first:prose-h3:mt-0 prose-p:leading-relaxed prose-p:my-3"
             set:html={sectionsHtml}
           />
         </div>
         {hasSidebar && (
-          <aside class="recipe-sidebar lg:sticky lg:top-6 space-y-8 p-6 rounded-xl bg-bg-2 border border-ui-2">
+          <aside class="recipe-sidebar lg:sticky lg:top-6 space-y-6 p-6 rounded-2xl bg-bg-2 border-2 border-ui-2 shadow-sm">
             {flatIngredients.length > 0 && (
               <div class="sidebar-block">
                 <h2>Ingredients</h2>
@@ -215,7 +228,7 @@ const servings = recipe.servings != null ? String(recipe.servings) : null;
   }
   .recipe-content :global(p b) {
     font-weight: 600;
-    color: var(--color-or);
+    color: var(--color-gr);
     margin-right: 0.25em;
   }
   .recipe-content :global(hr) {
@@ -236,7 +249,7 @@ const servings = recipe.servings != null ? String(recipe.servings) : null;
     padding: 0.1em 0.35em 0.14em;
     margin-left: 0.28em;
     border-radius: 9999px;
-    background: color-mix(in srgb, var(--color-or) 75%, var(--color-base-800));
+    background: color-mix(in srgb, var(--color-cy) 75%, var(--color-base-800));
     color: var(--color-bg);
     font-weight: 500;
     line-height: 1;
@@ -248,10 +261,10 @@ const servings = recipe.servings != null ? String(recipe.servings) : null;
 
   .recipe-sidebar :global(h2) {
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-tx-2);
+    color: var(--color-re);
     margin: 0 0 0.75rem 0;
   }
   .recipe-sidebar :global(h2:not(:first-child)) {

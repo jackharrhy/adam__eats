@@ -3,63 +3,79 @@ import { getEmDashCollection } from "emdash";
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 import type { RecipeData } from "../types";
+import { recipeImageUrl } from "../utils/images";
 
 const { entries } = await getEmDashCollection("recipes", {
-	status: "published",
+    status: "published",
 });
 const recipes = (
-	entries as unknown as Array<{ id: string; data: RecipeData }>
-).toSorted((a, b) => a.data.title.localeCompare(b.data.title));
+    entries as unknown as Array<{ id: string; data: RecipeData }>
+    ).toSorted((a, b) => a.data.title.localeCompare(b.data.title));
 
 const cardMorph = {
-  forwards: {
-    old: { name: "fade", duration: "0.1s", easing: "ease-out" },
-    new: { name: "fade", duration: "0.3s", easing: "ease-in" },
-  },
-  backwards: {
-    old: { name: "fade", duration: "0.3s", easing: "ease-out" },
-    new: { name: "fade", duration: "0.15s", easing: "ease-in" },
-  },
+    forwards: {
+        old: { name: "fade", duration: "0.1s", easing: "ease-out" },
+        new: { name: "fade", duration: "0.3s", easing: "ease-in" },
+    },
+    backwards: {
+        old: { name: "fade", duration: "0.3s", easing: "ease-out" },
+        new: { name: "fade", duration: "0.15s", easing: "ease-in" },
+    },
 };
 ---
 
 <html lang="en">
-	<head>
-		<ClientRouter />
-		<meta charset="utf-8" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			rel="icon"
-			href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🍳</text></svg>"
-		/>
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>adam__eats</title>
-	</head>
-	<body class="bg-bg text-tx antialiased p-4">
-		<p class="text-center py-10 text-4xl uppercase text-or" transition:animate="fade">adam__eats</p>
-		<main class="max-w-4xl mx-auto" transition:animate="fade">
-			<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none p-0 m-0">
-				{recipes.map((r) => (
-					<li>
-						<a
-							href={`/recipes/${r.id}`}
-							class="block p-5 rounded-lg bg-bg-2 border border-ui-2 hover:border-or hover:shadow-md transition-colors"
-							transition:name={`recipe-card-${r.id}`}
-							transition:animate={cardMorph}
-						>
-							<span class="text-lg font-medium text-tx">
-								{r.data.title}
-							</span>
-						</a>
-					</li>
-				))}
-			</ul>
-		</main>
-	</body>
+    <head>
+        <ClientRouter />
+        <script is:inline>
+        document.addEventListener("astro:before-swap", (e) => {
+            if (e.navigationType === "traverse") {
+                e.newDocument.documentElement.style.minHeight = `${history.state.scrollY + innerHeight}px`;
+            }
+        });
+        </script>
+        <meta charset="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Cause:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+        />
+        <link
+        rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🍳</text></svg>"
+        />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>adam__eats</title>
+    </head>
+    <body class="text-tx antialiased p-4">
+        <p class="text-center py-10 text-6xl font-bold text-re" transition:animate="fade">adam__eats</p>
+        <main class="max-w-6xl mx-auto" transition:animate="fade">
+            <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0 m-0">
+                {recipes.map((r, i) => (
+                <li>
+                    <a
+                    href={`/recipes/${r.id}`}
+                    class="group block rounded-2xl bg-bg-2 border-2 border-ui-2 hover:border-re hover:shadow-lg hover:-translate-y-1 transition-all duration-200 overflow-hidden"
+                    transition:name={`recipe-card-${r.id}`}
+                    transition:animate={cardMorph}
+                    >
+                        <div class="overflow-hidden">
+                            <img
+                            src={recipeImageUrl(r.data.title, r.data.cover_image)}
+                            alt={r.data.title}
+                            class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                            />
+                        </div>
+                        <span class="block p-4 text-xl font-semibold text-tx text-center">
+                            {r.data.title}
+                        </span>
+                    </a>
+                </li>
+                ))}
+            </ul>
+        </main>
+    </body>
 </html>

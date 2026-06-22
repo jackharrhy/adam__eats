@@ -35,7 +35,7 @@
 	--color-magenta-400: #ce5d97;
 	--color-magenta-600: #a02f6f;
 
-	--color-bg: #fffcf0;
+	--color-bg: #e6e4d9;
 	--color-bg-2: #f2f0e5;
 	--color-ui: #e6e4d9;
 	--color-ui-2: #dad8ce;
@@ -43,27 +43,25 @@
 	--color-tx-3: #b7b5ac;
 	--color-tx-2: #6f6e69;
 	--color-tx: #100f0f;
-	--color-re: #af3029;
-	--color-or: #bc5215;
-	--color-ye: #ad8301;
-	--color-gr: #66800b;
-	--color-cy: #24837b;
-	--color-bl: #205ea6;
-	--color-pu: #5e409d;
-	--color-ma: #a02f6f;
+	--color-re: #d14d41;
+	--color-or: #da702c;
+	--color-ye: #d0a215;
+	--color-gr: #879a39;
+	--color-cy: #3aa99f;
+	--color-bl: #4385be;
+	--color-pu: #8b7ec8;
+	--color-ma: #ce5d97;
 
-	--font-sans:
-		"Fraunces", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "URW Palladio L",
-		serif;
+	--font-sans: "Cause", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 	/* Prose (typography plugin) overrides to match theme */
 	--tw-prose-body: var(--color-tx);
 	--tw-prose-headings: var(--color-tx);
 	--tw-prose-links: var(--color-cy);
-	--tw-prose-bold: var(--color-tx);
-	--tw-prose-counters: var(--color-or);
+	--tw-prose-bold: var(--color-or);
+	--tw-prose-counters: var(--color-pu);
 	--tw-prose-quotes: var(--color-tx-2);
-	--tw-prose-quote-borders: var(--color-ui-3);
+	--tw-prose-quote-borders: var(--color-ma);
 	--tw-prose-hr: var(--color-ui-3);
 	--tw-prose-th-borders: var(--color-ui-3);
 	--tw-prose-td-borders: var(--color-ui-2);
@@ -81,8 +79,6 @@ html {
 body {
 	min-height: 100vh;
 	margin: 0;
-	background:
-		radial-gradient(circle at top, rgb(255 255 255 / 0.45), transparent 34%), var(--color-bg);
 	color: var(--color-tx);
 	font-family: var(--font-sans);
 }

@@ -53,7 +53,7 @@ const cardMorph = {
         <p class="text-center py-10 text-6xl font-bold text-re" transition:animate="fade">adam__eats</p>
         <main class="max-w-6xl mx-auto" transition:animate="fade">
             <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0 m-0">
-                {recipes.map((r, i) => (
+				{recipes.map((r) => (
                 <li>
                     <a
                     href={`/recipes/${r.id}`}

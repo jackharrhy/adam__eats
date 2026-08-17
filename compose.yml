@@ -3,6 +3,12 @@ services:
     build: .
     ports:
       - "127.0.0.1:4321:4321"
+    environment:
+      EMDASH_ENCRYPTION_KEY: ${EMDASH_ENCRYPTION_KEY:-}
+      EMDASH_SITE_URL: ${EMDASH_SITE_URL:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      RESEND_FROM: ${RESEND_FROM:-}
+      RESEND_REPLY_TO: ${RESEND_REPLY_TO:-}
     volumes:
       - adam_eats_data:/app/data
     restart: unless-stopped

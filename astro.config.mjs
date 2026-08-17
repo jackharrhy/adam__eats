@@ -23,6 +23,14 @@ export default defineConfig({
 				directory: "./data/uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
+			plugins: [
+				{
+					id: "adam-eats-resend",
+					version: "1.0.0",
+					format: "native",
+					entrypoint: new URL("./src/plugins/resend.ts", import.meta.url).href,
+				},
+			],
 		}),
 	],
 	vite: {

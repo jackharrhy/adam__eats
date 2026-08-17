@@ -12,6 +12,7 @@ minimumReleaseAgeExclude:
   - "@emdash-cms/gutenberg-to-portable-text@0.33.0"
   - astro@7.2.2
   - emdash@0.33.0
+pmOnFail: ignore
 onlyBuiltDependencies:
   - esbuild
   - sharp

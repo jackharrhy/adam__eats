@@ -56,6 +56,15 @@ const seed = {
 					type: "image",
 					options: { showPreview: true },
 				},
+				{
+					slug: "video",
+					label: "Video",
+					type: "file",
+					validation: {
+						allowedMimeTypes: ["video/mp4", "video/webm", "video/quicktime"],
+					},
+					options: { showPreview: true },
+				},
 				{ slug: "excerpt", label: "Excerpt", type: "text", options: { rows: 2 } },
 			],
 		},

@@ -3,15 +3,55 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - "@astrojs/markdown-satteri@0.3.1"
+  - "@astrojs/markdown-satteri@0.3.1 || 0.3.8"
   - "@astrojs/node@11.1.2"
   - "@astrojs/react@6.0.2"
-  - "@emdash-cms/admin@0.33.0"
-  - "@emdash-cms/auth@0.33.0"
-  - "@emdash-cms/blocks@0.33.0"
-  - "@emdash-cms/gutenberg-to-portable-text@0.33.0"
-  - astro@7.2.2
-  - emdash@0.33.0
+  - "@emdash-cms/admin@0.33.0 || 0.35.0"
+  - "@emdash-cms/auth@0.33.0 || 0.35.0"
+  - "@emdash-cms/blocks@0.33.0 || 0.35.0"
+  - "@emdash-cms/gutenberg-to-portable-text@0.33.0 || 0.35.0"
+  - astro@7.2.2 || 7.2.6
+  - emdash@0.33.0 || 0.35.0
+  - "@oxfmt/binding-android-arm-eabi@0.65.0"
+  - "@oxfmt/binding-android-arm64@0.65.0"
+  - "@oxfmt/binding-darwin-arm64@0.65.0"
+  - "@oxfmt/binding-darwin-x64@0.65.0"
+  - "@oxfmt/binding-freebsd-x64@0.65.0"
+  - "@oxfmt/binding-linux-arm-gnueabihf@0.65.0"
+  - "@oxfmt/binding-linux-arm-musleabihf@0.65.0"
+  - "@oxfmt/binding-linux-arm64-gnu@0.65.0"
+  - "@oxfmt/binding-linux-arm64-musl@0.65.0"
+  - "@oxfmt/binding-linux-ppc64-gnu@0.65.0"
+  - "@oxfmt/binding-linux-riscv64-gnu@0.65.0"
+  - "@oxfmt/binding-linux-riscv64-musl@0.65.0"
+  - "@oxfmt/binding-linux-s390x-gnu@0.65.0"
+  - "@oxfmt/binding-linux-x64-gnu@0.65.0"
+  - "@oxfmt/binding-linux-x64-musl@0.65.0"
+  - "@oxfmt/binding-openharmony-arm64@0.65.0"
+  - "@oxfmt/binding-win32-arm64-msvc@0.65.0"
+  - "@oxfmt/binding-win32-ia32-msvc@0.65.0"
+  - "@oxfmt/binding-win32-x64-msvc@0.65.0"
+  - "@oxlint/binding-android-arm-eabi@1.80.0"
+  - "@oxlint/binding-android-arm64@1.80.0"
+  - "@oxlint/binding-darwin-arm64@1.80.0"
+  - "@oxlint/binding-darwin-x64@1.80.0"
+  - "@oxlint/binding-freebsd-x64@1.80.0"
+  - "@oxlint/binding-linux-arm-gnueabihf@1.80.0"
+  - "@oxlint/binding-linux-arm-musleabihf@1.80.0"
+  - "@oxlint/binding-linux-arm64-gnu@1.80.0"
+  - "@oxlint/binding-linux-arm64-musl@1.80.0"
+  - "@oxlint/binding-linux-ppc64-gnu@1.80.0"
+  - "@oxlint/binding-linux-riscv64-gnu@1.80.0"
+  - "@oxlint/binding-linux-riscv64-musl@1.80.0"
+  - "@oxlint/binding-linux-s390x-gnu@1.80.0"
+  - "@oxlint/binding-linux-x64-gnu@1.80.0"
+  - "@oxlint/binding-linux-x64-musl@1.80.0"
+  - "@oxlint/binding-openharmony-arm64@1.80.0"
+  - "@oxlint/binding-win32-arm64-msvc@1.80.0"
+  - "@oxlint/binding-win32-ia32-msvc@1.80.0"
+  - "@oxlint/binding-win32-x64-msvc@1.80.0"
+  - oxfmt@0.65.0
+  - oxlint@1.80.0
 pmOnFail: ignore
 onlyBuiltDependencies:
   - esbuild

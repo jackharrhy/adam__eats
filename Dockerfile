@@ -1,9 +1,16 @@
 FROM node:24-slim AS base
-ARG PNPM_VERSION=12.0.0-rc.6
+ARG PNPM_VERSION=12.0.0-rc.10
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME/bin:$PATH"
+ENV npm_config_node_gyp=/usr/bin/node-gyp
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates curl \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        g++ \
+        make \
+        node-gyp \
+        python3 \
     && curl -fsSL https://get.pnpm.io/install.sh \
         | env PNPM_VERSION="$PNPM_VERSION" ENV=/root/.profile SHELL=/bin/sh sh - \
     && rm -rf /var/lib/apt/lists/*

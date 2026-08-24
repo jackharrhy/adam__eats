@@ -2,7 +2,7 @@
   "name": "adam__eats",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@12.0.0-rc.6",
+  "packageManager": "pnpm@12.0.0-rc.10",
   "emdash": {
     "seed": "seed/seed.json"
   },
@@ -21,12 +21,12 @@
     "knip": "knip --no-exit-code --exclude unlisted,unresolved,exports,types,duplicates"
   },
   "dependencies": {
-    "@astrojs/node": "^11.1.2",
-    "@astrojs/react": "^6.0.2",
+    "@astrojs/node": "^11.1.4",
+    "@astrojs/react": "^6.0.4",
     "@cooklang/cooklang": "^0.18.7",
-    "astro": "^7.2.2",
-    "better-sqlite3": "^12.11.1",
-    "emdash": "^0.33.0",
+    "astro": "^7.2.6",
+    "better-sqlite3": "^13.0.3",
+    "emdash": "^0.35.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
@@ -35,10 +35,10 @@
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react-dom": "^19.2.5",
     "knip": "^6.32.2",
-    "oxfmt": "^0.55.0",
-    "oxlint": "^1.78.0",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
     "oxlint-tsgolint": "^7.0.2001",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",

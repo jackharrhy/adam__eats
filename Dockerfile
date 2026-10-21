@@ -1,4 +1,4 @@
-FROM node:24.22.1-slim AS base
+FROM node:24-slim AS base
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends ca-certificates \
     && update-ca-certificates && rm -rf /var/lib/apt/lists/*
@@ -30,7 +30,7 @@ COPY . .
 RUN --mount=type=cache,target=/pnpm/store \
     pnpm build
 
-FROM node:24.22.1-slim
+FROM node:24-slim
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends ca-certificates \
     && update-ca-certificates && rm -rf /var/lib/apt/lists/*

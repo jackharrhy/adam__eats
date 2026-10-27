@@ -25,7 +25,7 @@ jobs:
       - name: Install pnpm and Node.js
         uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
-          runtime: node@24
+          runtime: node@26
           cache: true
           install: false
 
@@ -43,3 +43,13 @@ jobs:
 
       - name: Build site
         run: pnpm run build
+
+  runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: docker build -t adam-eats-runtime-check .
+      - run: sh scripts/check-runtime.sh adam-eats-runtime-check
